@@ -10,6 +10,12 @@ import redis
 import scrapy
 ```
 
+## Build
+
+```bash
+$ docker build --network=host . -t my-tag
+```
+
 ## Usage
 
 ```shell
