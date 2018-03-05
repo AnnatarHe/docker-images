@@ -1,0 +1,29 @@
+version: '2'
+services:
+    db:
+        image: mysql:5.6
+        # volumes:
+        #     - pgdata:/var/lib/postgresql/data
+        environment:
+            - MYSQL_ROOT_PASSWORD=admin
+        ports:
+            - "3306:3306"
+
+    weeng:
+        image: reg.qiniu.com/annatarhe/we-engine:0.0.1
+        # image: we-eng:0.0.1
+        volumes:
+            - D:/tests/we-engine/WeEngine-Laster-Offline/:/server
+        command: php -S 0.0.0.0:8000
+        ports:
+            - "8000:8000"
+        depends_on:
+            - db
+        links:
+            - db
+
+#  NTFS in windows
+#  https://forums.docker.com/t/trying-to-get-postgres-to-work-on-persistent-windows-mount-two-issues/12456/5?u=friism
+volumes:
+    pgdata:
+        external: true
